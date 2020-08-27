@@ -1,2 +1,2 @@
 # navarra_cadastre
-Plugin para descargar el catastro de un municipio de la Comunidad Foral de Navarra (España)
+Plugin QGIS para descargar el Catastro de un municipio de la Comunidad Foral de Navarra (España)
