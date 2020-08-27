@@ -1,0 +1,48 @@
+# This file contains metadata for your plugin.
+
+# This file should be included when you package your plugin.# Mandatory items:
+
+[general]
+name=Navarra Cadastre
+qgisMinimumVersion=3.0
+description=Plugin para la descarga de los datos catastrales de Navarra (España)
+version=0.1
+author=Asociación Geoinnova
+email=patricio.soriano@geoinnova.org
+
+about=<p>Plugin de QGIS desarrollado por el Área de GIS y Desarrollo de la <a href='https://geoinnova.org/consultoria-desarrollo-sistemas-de-informacion-geografica/'>Asociación Geoinnova</a> para la descarga de datos catastrales gráficos y alfanuméricos de la Comunidad Foral del Navarra (España). La descarga usa la url disponible en la página web del Servicio de Riqueza Territorial y Tributos Patrimoniales de Navarra (SRT). <a href='https://catastro.navarra.es/descargas/'>https://catastro.navarra.es/descargas/</a></p>
+
+tracker=https://github.com/geoinnova/navarra_cadastre
+repository=https://github.com/geoinnova/navarra_cadastre
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+# Uncomment the following line and add your changelog:
+changelog=
+    27.08.2020 V0.1: Primera versión
+
+# Tags are comma separated with spaces allowed
+tags=cadastre,catastro, Navarra, Spain, España
+
+homepage=https://github.com/geoinnova/navarra_cadastre
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category=
+
+# If the plugin can run on QGIS Server.
+server=False
+
