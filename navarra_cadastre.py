@@ -23,6 +23,7 @@ from urllib import request, parse
 
 import sys
 import os.path
+import shutil
 
 import subprocess
 
@@ -68,6 +69,7 @@ class NavarraCadastre:
         self.msgBar = iface.messageBar()
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
+
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
@@ -218,39 +220,73 @@ class NavarraCadastre:
         self.msgBar.pushMessage(
             'Completar datos de municipio o indicar la ruta de descarga', level=Qgis.Critical, duration=3)
 
-    # Progress Download
-
     def reporthook(self, blocknum, blocksize, totalsize):
+        """Progress Download"""
         readsofar = blocknum * blocksize
         if totalsize > 0:
             percent = readsofar * 1e2 / totalsize
             self.dlg.progressBar.setValue(int(percent))
 
-    # Set Proxy
-    def set_proxy(self):
-        proxy_handler = request.ProxyHandler({
-            'http': '%s:%s' % (_proxy, _port),
-            'https': '%s:%s' % (_proxy, _port)
-        })
-        opener = request.build_opener(proxy_handler)
-        request.install_opener(opener)
-        return
-
-    # Unset Proxy
-    def unset_proxy(self):
-        proxy_handler = request.ProxyHandler({})
-        opener = request.build_opener(proxy_handler)
-        request.install_opener(opener)
-        return
-
-    # Encode URL Download
-
     def EncodeUrl(self, url):
+        """Encode URL Download"""
         url = parse.urlsplit(url)
         url = list(url)
         url[2] = parse.quote(url[2])
         encoded_link = parse.urlunsplit(url)
         return encoded_link
+
+    def getZipFile(self, municipality_value, datatype):
+        """Get data from url"""
+        municod = municipality_value[0:3]
+        folder = municipality_value.replace('/', '_')
+        datatype_code = ''
+        zip_data_type = ''
+
+        zippath = self.dlg.lineEdit_path.text()
+
+        wd = os.path.join(zippath, folder)
+
+        if (datatype == '1'):
+            datatype_code = 'grafico'
+            zip_data_type = 'grafico'
+        elif (datatype == '2'):
+            datatype_code = 'alfanumerico'
+            zip_data_type = 'alfanumerico'
+        else:
+            datatype_code = 'grafico'
+            zip_data_type = 'grafico'
+
+        url = u'https://catastro.navarra.es/descargas/municipios/%s/08/%s.zip' % (
+            municod, datatype_code)
+        try:
+            os.makedirs(wd)
+        except OSError:
+            pass
+
+        zipCartography = os.path.join(
+            wd, "%s_%s.zip" % (folder, zip_data_type))
+
+        e_url = self.EncodeUrl(url)
+
+        try:
+            urllib.request.urlretrieve(
+                e_url, zipCartography, self.reporthook)
+        except:
+            shutil.rmtree(wd)
+            raise
+
+    def unzip_file(self, muniname, zip_data_type):
+
+        zippath = self.dlg.lineEdit_path.text()
+        wd = os.path.join(zippath, muniname)
+
+        if os.path.isdir(wd):
+            for zipfilecatastro in os.listdir(wd):
+                if zipfilecatastro.endswith('.zip'):
+                    with zipfile.ZipFile(os.path.join(wd, zipfilecatastro), "r") as z:
+                        z.extractall(wd)
+            self.msgBar.pushMessage(
+                "%s files unzipped successfully in %s" % (zip_data_type, wd), level=Qgis.Info, duration=3)
 
     def download(self):
         """Dowload data funtion"""
@@ -263,83 +299,34 @@ class NavarraCadastre:
 
                 # QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
                 cod_muni_navarra = self.dlg.comboBox_municipality.currentText()
-
-                municod = cod_muni_navarra[0:3]
-                muniname = cod_muni_navarra[4:]
-
-                zippath = self.dlg.lineEdit_path.text()
-
-                # wd = os.path.join(zippath , cod_muni_navarra.replace(' ', "_"))
-                wd = os.path.join(zippath, cod_muni_navarra)
-
-                # self.msgBar.pushMessage(
-                #     'municod %s' % (municod), level=Qgis.Info, duration=3)
-
-
-                # self.msgBar.pushMessage(
-                #     'wd %s' % (wd), level=Qgis.Info, duration=3)
+                muniname = cod_muni_navarra.replace('/', '_')
 
                 # download shapes zip
                 if self.dlg.checkBox_cartography.isChecked():
 
-                    url = u'https://catastro.navarra.es/descargas/municipios/%s/08/grafico.zip' % (
-                        municod)
-                    try:
-                        os.makedirs(wd)
-                    except OSError:
-                        pass
+                    self.getZipFile(cod_muni_navarra, '1')
+                    self.unzip_file(muniname, 'Cartography')
 
-                    zipCartography = os.path.join(
-                        wd, "%s_carto.zip" % cod_muni_navarra)
+                    # Add all shapefiles in the dowload folder into a group
+                    root = QgsProject.instance().layerTreeRoot()
+                    layerGroup = root.addGroup(muniname)
+                    zippath = self.dlg.lineEdit_path.text()
+                    wd = os.path.join(zippath, muniname)
 
-                    e_url = self.EncodeUrl(url)
-                    try:
-                        urllib.request.urlretrieve(
-                            e_url, zipCartography, self.reporthook)
-                    except:
-                        shutil.rmtree(wd)
-                        raise
+                    for shape_item in os.listdir(wd):
+                        if shape_item.endswith('.shp'):
+                            vlayer = QgsVectorLayer(os.path.join(
+                                wd, shape_item), shape_item, "ogr")
+                            QgsProject.instance().addMapLayer(vlayer, False)
+                            layerGroup.insertChildNode(
+                                1, QgsLayerTreeLayer(vlayer))
 
                 # download data
                 if self.dlg.checkBox_data.isChecked():
+                    self.getZipFile(cod_muni_navarra, '2')
 
-                    url = u'https://catastro.navarra.es/descargas/municipios/%s/08/alfanumerico.zip' % (
-                        municod)
-                    try:
-                        os.makedirs(wd)
-                    except OSError:
-                        pass
-
-                    zipCartography = os.path.join(
-                        wd, "%s_data.zip" % cod_muni_navarra)
-                    e_url = self.EncodeUrl(url)
-
-                    try:
-                        urllib.request.urlretrieve(
-                            e_url, zipCartography, self.reporthook)
-                    except:
-                        shutil.rmtree(wd)
-                        raise
-
-                if os.path.isdir(wd):
-                    for zipfilecatastro in os.listdir(wd):
-                        if zipfilecatastro.endswith('.zip'):
-                            with zipfile.ZipFile(os.path.join(wd, zipfilecatastro), "r") as z:
-                                z.extractall(wd)
-                    self.msgBar.pushMessage("Files unzipped successfully.", level=Qgis.Info, duration=3)
-                
-               
-                self.dlg.progressBar.setValue(100)#No llega al 100% aunque lo descargue,es random
-
-                root = QgsProject.instance().layerTreeRoot()
-                layerGroup = root.addGroup(muniname)
-                
-                ## Add all shapefiles in the dowload folder into a group
-                for shape_item in os.listdir(wd):
-                    if shape_item.endswith('.shp'):
-                        vlayer = QgsVectorLayer(os.path.join(wd, shape_item), shape_item, "ogr")
-                        QgsProject.instance().addMapLayer(vlayer, False)
-                        layerGroup.insertChildNode(1, QgsLayerTreeLayer(vlayer))
+                # No llega al 100% aunque lo descargue,es random
+                self.dlg.progressBar.setValue(100)
 
             except Exception as e:
                 self.msgBar.pushMessage(

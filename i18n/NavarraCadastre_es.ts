@@ -64,32 +64,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;https://catastro.navarra.es/descargas/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Navarra Territorial Wealth and Patrimonial Tax Service (SRT)&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Más información y contacto en &lt;a href=&quot;mailto:info@geoinnova.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;info@geoinnova.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-p,li {white-space: pre-wrap;}
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body style=&quot;font-family: &apos;MS Shell Dlg 2&apos;;font-size: 11pt;font-weight: 400;font-style: normal;&quot;&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;&lt;span style=&quot;font-weight: 600&quot;&gt;Plugin para la descarga de los datos catastrales de la&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;&lt;span style=&quot;font-weight: 600&quot;&gt;Comunidad Foral de Navarra(España)&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type: empty;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;
-&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;Plugin de QGIS desarrollado por el Área deSIG y Desarrollo&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;de la &lt;a href=&quot;https://geoinnova.org/consultoria-desarrollo-sistemas-de-informacion-geografica/&quot;
-&gt;&lt;span style=&quot;text-decoration: underline; color: #0000ff&quot;&gt;Asociación Geoinnova&lt;/span&gt;&lt;/a&gt; para la descarga de la informacón&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;catastral gráfica y alfanumérica de Navarra (España).&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type: empty;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;
-text-indent: 0px;&quot;&gt;La descarga usa la URL disponible en la página web del &lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;&lt;a href=&quot;https://catastro.navarra.es/descargas/&quot;&gt;&lt;span style=&quot;text-decoration: underline; color: #0000ff&quot;
-&gt;Servicio de Riqueza Territorial y Tributos Patrimoniales (SRT).&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type: empty;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;-qt-block-indent: 0;text-indent: 0px;&quot;&gt;Más información y contacto en &lt;a href=&quot;mailto:info@geoinnova.org&quot;&gt;&lt;span style=&quot;text-decoration: underline; color: #0000ff&quot;&gt;info@geoinnova.org&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/body&gt;&lt;/html&gt;
-</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
