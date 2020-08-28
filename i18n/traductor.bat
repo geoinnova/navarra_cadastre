@@ -4,4 +4,4 @@ call "C:\OSGeo4W64\bin\qt5_env.bat"
 call "C:\OSGeo4W64\bin\py3_env.bat"
 
 @echo on
-pylupdate5 navarra_cadastre.pro
+pylupdate5 translation.pro
