@@ -236,7 +236,15 @@ class NavarraCadastre:
         return encoded_link
 
     def getZipFile(self, municipality_value, datatype):
-        """Get data from url"""
+        """Get cadastre zip file from url
+
+        :param municipality_value: Text with the code and the name of the municipality.
+        :type text: str
+
+        :param datatype: Type of data to download (grafico or alfanumerico)
+        :type text: str
+        """
+
         municod = municipality_value[0:3]
         folder = municipality_value.replace('/', '_')
         datatype_code = ''
@@ -276,6 +284,14 @@ class NavarraCadastre:
             raise
 
     def unzip_file(self, muniname, zip_data_type):
+        """Unzip file
+
+        :param muniname: Text with the name of the municipality.
+        :type text: str
+
+        :param zip_data_type: Info text
+        :type text: str
+        """
 
         zippath = self.dlg.lineEdit_path.text()
         wd = os.path.join(zippath, muniname)
@@ -287,6 +303,23 @@ class NavarraCadastre:
                         z.extractall(wd)
             self.msgBar.pushMessage(
                 "%s files unzipped successfully in %s" % (zip_data_type, wd), level=Qgis.Info, duration=3)
+
+    def addLayerGroup(self, muniname):
+        """ Add all shapefiles in the dowload folder into a group """
+
+        root = QgsProject.instance().layerTreeRoot()
+        layerGroup = root.addGroup(muniname)
+
+        zippath = self.dlg.lineEdit_path.text()
+        wd = os.path.join(zippath, muniname)
+
+        for shape_item in os.listdir(wd):
+            if shape_item.endswith('.shp'):
+                vlayer = QgsVectorLayer(os.path.join(
+                    wd, shape_item), shape_item, "ogr")
+                QgsProject.instance().addMapLayer(vlayer, False)
+                layerGroup.insertChildNode(
+                    1, QgsLayerTreeLayer(vlayer))
 
     def download(self):
         """Dowload data funtion"""
@@ -303,27 +336,14 @@ class NavarraCadastre:
 
                 # download shapes zip
                 if self.dlg.checkBox_cartography.isChecked():
-
                     self.getZipFile(cod_muni_navarra, '1')
                     self.unzip_file(muniname, 'Cartography')
-
-                    # Add all shapefiles in the dowload folder into a group
-                    root = QgsProject.instance().layerTreeRoot()
-                    layerGroup = root.addGroup(muniname)
-                    zippath = self.dlg.lineEdit_path.text()
-                    wd = os.path.join(zippath, muniname)
-
-                    for shape_item in os.listdir(wd):
-                        if shape_item.endswith('.shp'):
-                            vlayer = QgsVectorLayer(os.path.join(
-                                wd, shape_item), shape_item, "ogr")
-                            QgsProject.instance().addMapLayer(vlayer, False)
-                            layerGroup.insertChildNode(
-                                1, QgsLayerTreeLayer(vlayer))
+                    self.addLayerGroup(muniname)
 
                 # download data
                 if self.dlg.checkBox_data.isChecked():
                     self.getZipFile(cod_muni_navarra, '2')
+                    self.unzip_file(muniname, 'Data')
 
                 # No llega al 100% aunque lo descargue,es random
                 self.dlg.progressBar.setValue(100)
@@ -335,11 +355,6 @@ class NavarraCadastre:
 
     def run(self):
         """Run method that performs all the real work"""
-
-        # Create the dialog with elements (after translation) and keep reference
-        # Only create GUI ONCE in callback, so that it will only load when the plugin is started
-        # if self.first_start == True:
-        #     self.first_start = False
 
         self.dlg.lineEdit_path.clear()
         self.dlg.checkBox_cartography.setChecked(0)
