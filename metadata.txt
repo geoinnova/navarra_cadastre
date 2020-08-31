@@ -25,7 +25,7 @@ changelog=
     31.08.2020 V1.0: Primera versión
 
 # Tags are comma separated with spaces allowed
-tags=cadastre,catastro, Navarra, Spain, España
+tags=cadastre,catastro, Navarra, Spain, España, catastro navarro
 
 homepage=https://github.com/geoinnova/navarra_cadastre
 category=Plugins
