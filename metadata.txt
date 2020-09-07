@@ -5,10 +5,10 @@
 [general]
 name=Navarra Cadastre
 qgisMinimumVersion=3.0
-description=Plugin para la descarga y visualización directa en QGIS de los datos catastrales de la Comunidad Foral de Navarra (España)
+description=Plugin para la descarga de los datos catastrales de Navarra (España)
 version=1.0
 author=Asociación Geoinnova
-email=info@geoinnova.org
+email=patricio.soriano@geoinnova.org
 
 about=<p>Plugin de QGIS desarrollado por el Área de GIS y Desarrollo de la <a href='https://geoinnova.org/consultoria-desarrollo-sistemas-de-informacion-geografica/'>Asociación Geoinnova</a> para la descarga de datos catastrales gráficos y alfanuméricos de la Comunidad Foral del Navarra (España). La descarga usa la url disponible en la página web del Servicio de Riqueza Territorial y Tributos Patrimoniales de Navarra (SRT). <a href='https://catastro.navarra.es/descargas/'>https://catastro.navarra.es/descargas/</a></br></br>QGIS plugina, <a href='https://geoinnova.org/consultoria-desarrollo-sistemas-de-informacion-geografica/'>Geoinnova Elkartearen</a> GIS eta Garapen Arloak garatua, Nafarroako Foru Komunitateko (Espainia) katastroko datu grafikoak eta alfanumerikoak deskargatzeko. Deskargak Nafarroako Lurralde Aberastasunaren eta Ondare Zergen Zerbitzuaren webgunean eskuragarri dagoen URLa erabiltzen du <a href='https://catastro.navarra.es/descargas/'>https://catastro.navarra.es/descargas/</a></br></br>QGIS plugin developed by the GIS and Development Area of ​​the  <a href='https://geoinnova.org/consultoria-desarrollo-sistemas-de-informacion-geografica/'>Geoinnova Association</a> to download graphic and alphanumeric cadastral data from the Navarra (Spain).The download uses the url available on the website of the Navarra Territorial Wealth and Patrimonial Tax Service (SRT) <a href='https://catastro.navarra.es/descargas/'>https://catastro.navarra.es/descargas/</a><p>
 
@@ -25,7 +25,7 @@ changelog=
     31.08.2020 V1.0: Primera versión
 
 # Tags are comma separated with spaces allowed
-tags=spain , cadastre , catastro , españa , navarra , catastro navarro
+tags=cadastre,catastro, Navarra, Spain, España
 
 homepage=https://github.com/geoinnova/navarra_cadastre
 category=Plugins
