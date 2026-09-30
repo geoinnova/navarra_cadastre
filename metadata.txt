@@ -5,6 +5,8 @@
 [general]
 name=Navarra Cadastre
 qgisMinimumVersion=3.0
+qgisMaximumVersion=4.99
+supportsQt6=True
 description=Plugin para la descarga y visualización directa en QGIS de los datos catastrales de la Comunidad Foral de Navarra (España)
 version=1.0
 author=Asociación Geoinnova
