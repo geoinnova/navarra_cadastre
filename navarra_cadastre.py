@@ -33,12 +33,7 @@ import socket
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication
 from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction
-
-from PyQt5.QtWidgets import QFileDialog
-
-# Initialize Qt resources from file resources.py
-from .resources import *
+from qgis.PyQt.QtWidgets import QAction, QFileDialog
 
 # Import the code for the dialog
 from .navarra_cadastre_dialog import NavarraCadastreDialog
@@ -186,7 +181,7 @@ class NavarraCadastre:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/navarra_cadastre/icon.png'
+        icon_path = os.path.join(self.plugin_dir, 'icon.png')
         self.add_action(
             icon_path,
             text=self.tr(u'Navarra Cadastre'),
@@ -361,7 +356,7 @@ class NavarraCadastre:
         self.dlg.checkBox_data.setChecked(0)
 
         self.dlg.progressBar.setValue(0)
-        self.dlg.setWindowIcon(QIcon(':/plugins/navarra_cadastre/icon.png'))
+        self.dlg.setWindowIcon(QIcon(os.path.join(self.plugin_dir, 'icon.png')))
 
         self.dlg.comboBox_municipality.clear()
         self.dlg.comboBox_municipality.addItems(listMunicipios)
@@ -371,7 +366,7 @@ class NavarraCadastre:
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = self.dlg.exec()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
